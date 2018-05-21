@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "activeresource", "~> 3.0.0"
