@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/SpiffyStores/spiffy_stores_api.svg?branch=master)](https://travis-ci.org/SpiffyStores/spiffy_stores_api)
-# SpiffyStores API
+Spiffy Stores API
+=================
 
 The SpiffyStores API gem allows Ruby developers to programmatically access the admin section of SpiffyStores stores.
 
@@ -34,15 +34,6 @@ Or install via [gem](http://rubygems.org/)
 gem install spiffy_stores_api
 ```
 
-#### Rails 5
-
-spiffy_stores_api is compatible with Rails 5 but since the latest ActiveResource release (4.1) is locked on Rails 4.x, you'll need to use the unreleased master version:
-
-```ruby
-gem 'spiffy_stores_api'
-gem 'activeresource', github: 'rails/activeresource'
-```
-
 ### Getting Started
 
 SpiffyStoresAPI uses ActiveResource to communicate with the REST web service. ActiveResource has to be configured with a fully authorized URL of a particular store first. To obtain that URL you can follow these steps:
@@ -54,7 +45,7 @@ SpiffyStoresAPI uses ActiveResource to communicate with the REST web service. Ac
 2. For a private App you just need to set the base site url as follows:
 
    ```ruby
-   shop_url = "https://#{API_KEY}:#{PASSWORD}@SHOP_NAME.myspiffy_stores.com/admin"
+   shop_url = "https://#{API_KEY}:#{PASSWORD}@SHOP_NAME.spiffystores.com/api"
    SpiffyStoresAPI::Base.site = shop_url
    ```
 
@@ -66,10 +57,12 @@ SpiffyStoresAPI uses ActiveResource to communicate with the REST web service. Ac
   SpiffyStoresAPI::Session.setup({:api_key => API_KEY, :secret => SHARED_SECRET})
   ```
 
+   Spiffy Stores maintains [`omniauth-spiffy-oauth2`](https://github.com/SpiffyStores/omniauth-spiffy-oauth2) which securely wraps the OAuth flow and interactions with Spiffy Stores (steps 3 and 4 above). Using this gem is the recommended way to use OAuth authentication in your application.
+
 3. In order to access a shop's data, apps need an access token from that specific shop. This is a two-stage process. Before interacting with a shop for the first time an app should redirect the user to the following URL:
 
    ```
-   GET https://SHOP_NAME.myspiffy_stores.com/admin/oauth/authorize
+   GET https://SHOP_NAME.spiffystores.com/api/oauth/authorize
    ```
 
    with the following parameters:
@@ -82,7 +75,7 @@ SpiffyStoresAPI uses ActiveResource to communicate with the REST web service. Ac
    We've added the create_permission_url method to make this easier, first instantiate your session object:
 
    ```ruby
-   session = SpiffyStoresAPI::Session.new("SHOP_NAME.myspiffy_stores.com")
+   session = SpiffyStoresAPI::Session.new("SHOP_NAME.spiffystores.com")
    ```
 
    Then call:
@@ -109,7 +102,7 @@ SpiffyStoresAPI uses ActiveResource to communicate with the REST web service. Ac
    If all security checks pass, the authorization code can be exchanged once for a permanent access token. The exchange is made with a request to the shop.
 
    ```
-   POST https://SHOP_NAME.spiffystores.com/admin/oauth/token
+   POST https://SHOP_NAME.spiffystores.com/api/oauth/token
    ```
 
    with the following parameters:
@@ -131,7 +124,7 @@ SpiffyStoresAPI uses ActiveResource to communicate with the REST web service. Ac
    This method will save the token to the session object and return it. For future sessions simply pass the token in when creating the session object:
 
    ```ruby
-   session = SpiffyStoresAPI::Session.new("SHOP_NAME.myspiffy_stores.com", token)
+   session = SpiffyStoresAPI::Session.new("SHOP_NAME.spiffystores.com", token)
    ```
 
 5. The session must be activated before use:
@@ -143,7 +136,7 @@ SpiffyStoresAPI uses ActiveResource to communicate with the REST web service. Ac
 6. Now you're ready to make authorized API requests to your shop! Data is returned as ActiveResource instances:
 
    ```ruby
-   shop = SpiffyStoresAPI::Shop.current
+   shop = SpiffyStoresAPI::Store.current
 
    # Get a specific product
    product = SpiffyStoresAPI::Product.find(179761209)
@@ -163,7 +156,7 @@ SpiffyStoresAPI uses ActiveResource to communicate with the REST web service. Ac
    Alternatively, you can use #temp to initialize a Session and execute a command which also handles temporarily setting ActiveResource::Base.site:
 
    ```ruby
-   products = SpiffyStoresAPI::Session.temp("SHOP_NAME.myspiffy_stores.com", token) { SpiffyStoresAPI::Product.find(:all) }
+   products = SpiffyStoresAPI::Session.temp("SHOP_NAME.spiffystores.com", token) { SpiffyStoresAPI::Product.find(:all) }
    ```
 
 7. If you want to work with another shop, you'll first need to clear the session:

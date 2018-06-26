@@ -1,6 +1,5 @@
 module SpiffyStoresAPI
   class Product < Base
-    include Events
     include Metafields
 
     # compute the price range
@@ -15,10 +14,10 @@ module SpiffyStoresAPI
     end
 
     def collections
-      CustomCollection.find(:all, :params => {:product_id => self.id})
+      StandardCollection.find(:all, :params => {:product_id => self.id})
     end
 
-    def smart_collections
+    def super_collections
       SmartCollection.find(:all, :params => {:product_id => self.id})
     end
 

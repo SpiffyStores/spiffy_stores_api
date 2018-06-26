@@ -1,6 +1,5 @@
 module SpiffyStoresAPI
-  class SmartCollection < Base
-    include Events
+  class SuperCollection < Base
     include Metafields
 
     def products

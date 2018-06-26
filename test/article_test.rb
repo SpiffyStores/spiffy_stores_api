@@ -50,24 +50,24 @@ class ArticleTest < Test::Unit::TestCase
     assert_equal 3, authors.length
   end
 
-  def test_get_tags
-    fake "articles/tags", :method => :get, :body => load_fixture('tags')
-    tags = SpiffyStoresAPI::Article.tags
-    assert_equal "consequuntur", tags.first
-    assert_equal "repellendus", tags.last
-  end
+# def test_get_tags
+#   fake "articles/tags", :method => :get, :body => load_fixture('tags')
+#   tags = SpiffyStoresAPI::Article.tags
+#   assert_equal "consequuntur", tags.first
+#   assert_equal "repellendus", tags.last
+# end
 
-  def test_get_tags_for_blog_id
-    fake "blogs/1008414260/articles/tags", :method => :get, :body => load_fixture('tags')
-    tags = SpiffyStoresAPI::Article.tags(:blog_id => 1008414260)
-    assert_equal "consequuntur", tags.first
-    assert_equal "repellendus", tags.last
-  end
-
-  def test_get_popular_tags
-    fake "articles/tags.json?limit=1&popular=1", :extension => false, :method => :get, :body => load_fixture('tags')
-    tags = SpiffyStoresAPI::Article.tags(:popular => 1, :limit => 1)
-    assert_equal 3, tags.length
-  end
+# def test_get_tags_for_blog_id
+#   fake "blogs/1008414260/articles/tags", :method => :get, :body => load_fixture('tags')
+#   tags = SpiffyStoresAPI::Article.tags(:blog_id => 1008414260)
+#   assert_equal "consequuntur", tags.first
+#   assert_equal "repellendus", tags.last
+# end
+#
+# def test_get_popular_tags
+#   fake "articles/tags.json?limit=1&popular=1", :extension => false, :method => :get, :body => load_fixture('tags')
+#   tags = SpiffyStoresAPI::Article.tags(:popular => 1, :limit => 1)
+#   assert_equal 3, tags.length
+# end
 
 end

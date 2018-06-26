@@ -1,6 +1,5 @@
 module SpiffyStoresAPI
   class Blog < Base
-    include Events
     include Metafields
 
     def articles

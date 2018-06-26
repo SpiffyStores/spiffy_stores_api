@@ -1,6 +1,5 @@
 module SpiffyStoresAPI
-  class CustomCollection < Base
-    include Events
+  class StandardCollection < Base
     include Metafields
 
     def products

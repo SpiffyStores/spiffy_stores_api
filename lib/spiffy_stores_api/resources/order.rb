@@ -1,6 +1,5 @@
 module SpiffyStoresAPI
   class Order < Base
-    include Events
     include Metafields
 
     def close;  load_attributes_from_response(post(:close, {}, only_id)); end

@@ -17,11 +17,11 @@ class BaseTest < Test::Unit::TestCase
 
     assert_nil ActiveResource::Base.site
     assert_equal 'https://shop1.spiffystores.com/api', SpiffyStoresAPI::Base.site.to_s
-    assert_equal 'https://shop1.spiffystores.com/api', SpiffyStoresAPI::Shop.site.to_s
+    assert_equal 'https://shop1.spiffystores.com/api', SpiffyStoresAPI::Store.site.to_s
 
-    assert_nil ActiveResource::Base.headers['X-SpiffyStores-Access-Token']
-    assert_equal 'token1', SpiffyStoresAPI::Base.headers['X-SpiffyStores-Access-Token']
-    assert_equal 'token1', SpiffyStoresAPI::Shop.headers['X-SpiffyStores-Access-Token']
+    assert_nil ActiveResource::Base.headers['Authorization']
+    assert_equal 'Bearer token1', SpiffyStoresAPI::Base.headers['Authorization']
+    assert_equal 'Bearer token1', SpiffyStoresAPI::Store.headers['Authorization']
   end
 
   test '#clear_session should clear site and headers from Base' do
@@ -30,11 +30,11 @@ class BaseTest < Test::Unit::TestCase
 
     assert_nil ActiveResource::Base.site
     assert_nil SpiffyStoresAPI::Base.site
-    assert_nil SpiffyStoresAPI::Shop.site
+    assert_nil SpiffyStoresAPI::Store.site
 
-    assert_nil ActiveResource::Base.headers['X-SpiffyStores-Access-Token']
-    assert_nil SpiffyStoresAPI::Base.headers['X-SpiffyStores-Access-Token']
-    assert_nil SpiffyStoresAPI::Shop.headers['X-SpiffyStores-Access-Token']
+    assert_nil ActiveResource::Base.headers['Authorization']
+    assert_nil SpiffyStoresAPI::Base.headers['Authorization']
+    assert_nil SpiffyStoresAPI::Store.headers['Authorization']
   end
 
   test '#activate_session with one session, then clearing and activating with another session should send request to correct shop' do
@@ -44,11 +44,11 @@ class BaseTest < Test::Unit::TestCase
 
     assert_nil ActiveResource::Base.site
     assert_equal 'https://shop2.spiffystores.com/api', SpiffyStoresAPI::Base.site.to_s
-    assert_equal 'https://shop2.spiffystores.com/api', SpiffyStoresAPI::Shop.site.to_s
+    assert_equal 'https://shop2.spiffystores.com/api', SpiffyStoresAPI::Store.site.to_s
 
-    assert_nil ActiveResource::Base.headers['X-SpiffyStores-Access-Token']
-    assert_equal 'token2', SpiffyStoresAPI::Base.headers['X-SpiffyStores-Access-Token']
-    assert_equal 'token2', SpiffyStoresAPI::Shop.headers['X-SpiffyStores-Access-Token']
+    assert_nil ActiveResource::Base.headers['Authorization']
+    assert_equal 'Bearer token2', SpiffyStoresAPI::Base.headers['Authorization']
+    assert_equal 'Bearer token2', SpiffyStoresAPI::Store.headers['Authorization']
   end
 
   test '#activate_session with nil raises an InvalidSessionError' do

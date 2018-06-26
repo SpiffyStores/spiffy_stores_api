@@ -1,3 +1,84 @@
+== Version 4.11.0
+
+* Added `SpiffyStoresAPI::InventoryItem`
+* Added `SpiffyStoresAPI::InventoryLevel`
+* Added `#inventory_levels` method to `SpiffyStoresAPI::Location`
+
+== Version 4.10.0
+
+* Added `SpiffyStoresAPI::AccessScope`
+
+== Version 4.9.1
+
+* Fix a bug with custom properties for orders
+
+== Version 4.9.0
+
+* Added `SpiffyStoresAPI::PriceRule`
+* Added `SpiffyStoresAPI::DiscountCode`
+
+== Version 4.8.0
+
+* Added `add_engagements` to `SpiffyStoresAPI::MarketingEvent`
+
+== Version 4.7.1
+
+* Added support for URL parameter (e.g. limit & page) to SpiffyStoresAPI::Metafields
+* Added support for URL parameter (e.g. limit & page) to metafield operator in SpiffyStoresAPI::Store
+
+== Version 4.7.0
+
+* Removed the mandatory `application_id` parameter from `SpiffyStoresAPI::ProductListing` and `SpiffyStoresAPI::CollectionListing`
+* Fixed a bug related to the non-standard primary key for `SpiffyStoresAPI::ProductListing` and `SpiffyStoresAPI::CollectionListing`
+
+== Version 4.6.0
+
+* Added `SpiffyStoresAPI::Report`
+
+== Version 4.5.0
+
+* Added `SpiffyStoresAPI::MarketingEvent`
+
+== Version 4.4.0
+
+* Added `SpiffyStoresAPI::CustomerInvite`
+* Support for Customer#send_invite endpoint
+
+== Version 4.3.8
+
+* Added `SpiffyStoresAPI::ResourceFeedback`
+
+== Version 4.3.7
+
+* Added support for `complete` in `SpiffyStoresAPI::DraftOrder`
+
+== Version 4.3.6
+
+* Fixed the `customer_saved_search_id` param in `SpiffyStoresAPI::CustomerSavedSearch#customers`.
+
+== Version 4.3.5
+
+* Added support for online mode access tokens, token expiry, and associated_user information.
+* Added `SpiffyStoresAPI::DraftOrder`
+* Added `SpiffyStoresAPI::DraftOrderInvoice`
+
+== Version 4.3.4
+
+* Added `SpiffyStoresAPI::ProductListing`
+* Added `SpiffyStoresAPI::CollectionListing`
+
+== Version 4.3.3
+
+* Added `SpiffyStoresAPI::StorefrontAccessToken`
+
+== Version 4.3.2
+
+* Relax Ruby version requirement to >= `2.0`
+
+== Version 4.3.1
+
+* Support for SpiffyStoresAPI::ApplicationCredit
+
 == Version 4.3.0
 
 * Require Ruby >= `2.3.0`
@@ -9,7 +90,7 @@
 
 == Version 4.2.1
 
-* Support for Users and Discounts (SpiffyStores Plus only)
+* Support for Users and Discounts
 * Adds Customer#account_activation_url method
 * Adds ability to open a fulfillment.
 
@@ -211,8 +292,8 @@ console' * Fix Variant to support accessing both nested variants with a product 
 
 == Version 1.1.0 (September 24, 2010)
 
-* Add new Events API for Shop, Order, Product, CustomCollection, SmartCollection, Page, Blog and Article
-* Add new 'compact' product image size variant
+* Add new Events API for Store, Order, Product, CustomCollection, SmartCollection, Page, Blog and
+Article * Add new 'compact' product image size variant
 * Rails 3 fix: attribute_accessors has to be explicitly included since activesupport 3.0.0
 
 == Version 1.0.6

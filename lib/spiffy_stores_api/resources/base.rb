@@ -1,19 +1,10 @@
 require 'spiffy_stores_api/version'
 
-#class ActiveResource::Connection
-#  def http
-#    h = configure_http(new_http)
-#    h.set_debug_output $stderr
-#    h
-#  end
-#end
-
 module SpiffyStoresAPI
   class Base < ActiveResource::Base
     class InvalidSessionError < StandardError; end
     extend Countable
     self.timeout = 90
-    self.logger = ActiveRecord::Base.logger
     self.include_root_in_json = false
     self.headers['User-Agent'] = ["SpiffyStoresAPI/#{SpiffyStoresAPI::VERSION}",
                                   "ActiveResource/#{ActiveResource::VERSION::STRING}",

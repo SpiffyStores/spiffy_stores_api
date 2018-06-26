@@ -1,6 +1,5 @@
 module SpiffyStoresAPI
   class Article < Base
-    include Events
     include Metafields
     include DisablePrefixCheck
 

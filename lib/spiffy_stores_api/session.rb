@@ -7,11 +7,11 @@ module SpiffyStoresAPI
   end
 
   class Session
-    cattr_accessor :api_key, :secret, :protocol, :myspiffy_stores_domain, :port
+    cattr_accessor :api_key, :secret, :protocol, :spiffy_stores_domain, :port
     self.protocol = 'https'
-    self.myspiffy_stores_domain = 'spiffystores.com'
+    self.spiffy_stores_domain = 'spiffystores.com'
 
-    attr_accessor :url, :token, :shop, :name
+    attr_accessor :url, :token, :shop, :name, :extra
 
     class << self
 
@@ -39,12 +39,12 @@ module SpiffyStoresAPI
         url = url.strip.gsub(/\Ahttps?:\/\//, '')
         # extract host, removing any username, password or path
         store = URI.parse("https://#{url}").host
-        # extract subdomain of .myspiffy_stores.com
+        # extract subdomain of .spiffystores.com
         if idx = store.index(".")
           store = store.slice(0, idx)
         end
         return nil if store.empty?
-        store = "#{store}.#{myspiffy_stores_domain}"
+        store = "#{store}.#{spiffy_stores_domain}"
         port ? "#{store}:#{port}" : store
       rescue URI::InvalidURIError
         nil
@@ -67,10 +67,11 @@ module SpiffyStoresAPI
       end
     end
 
-    def initialize(url, token = nil, shop = nil)
+    def initialize(url, token = nil, shop = nil, extra = {})
       self.url = self.class.prepare_url(url)
       self.token = token
       self.shop = shop
+      self.extra = extra
     end
 
     def create_permission_url(scope, redirect_uri = nil)
@@ -86,12 +87,15 @@ module SpiffyStoresAPI
         raise SpiffyStoresAPI::ValidationException, "Invalid Signature: Possible malicious login"
       end
 
-      code = params['code']
-
-      response = access_token_request(code)
-
+      response = access_token_request(params['code'])
       if response.code == "200"
-        token = JSON.parse(response.body)['access_token']
+        self.extra = JSON.parse(response.body)
+        self.token = extra.delete('access_token')
+
+        if expires_in = extra.delete('expires_in')
+          extra['expires_at'] = Time.now.utc.to_i + expires_in
+        end
+        token
       else
         raise RuntimeError, response.msg
       end
@@ -107,6 +111,21 @@ module SpiffyStoresAPI
 
     def valid?
       url.present? && token.present?
+    end
+
+    def expires_in
+      return unless expires_at.present?
+      [0, expires_at.to_i - Time.now.utc.to_i].max
+    end
+
+    def expires_at
+      return unless extra.present?
+      @expires_at ||= Time.at(extra['expires_at']).utc
+    end
+
+    def expired?
+      return false if expires_in.nil?
+      expires_in <= 0
     end
 
     private
