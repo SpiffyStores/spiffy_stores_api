@@ -1,5 +1,7 @@
 Spiffy Stores API
 =================
+[![Build Status](https://travis-ci.com/SpiffyStores/spiffy_stores_api.svg?branch=master)](https://travis-ci.com/SpiffyStores/spiffy_stores_api)
+
 
 The SpiffyStores API gem allows Ruby developers to programmatically access the admin section of SpiffyStores stores.
 
@@ -9,12 +11,9 @@ The API is implemented as JSON over HTTP using all four verbs (GET/POST/PUT/DELE
 
 ### Requirements
 
-All API usage happens through SpiffyStores applications, created by either shop owners for their own shops, or by SpiffyStores Partners for use by other shop owners:
+All API usage happens through SpiffyStores applications.
 
-* Shop owners can create applications for themselves through their own admin: https://docs.spiffy_stores.com/api/authentication/creating-a-private-app
-* SpiffyStores Partners create applications through their admin: http://app.spiffy_stores.com/services/partners
-
-For more information and detailed documentation about the API visit http://api.spiffy_stores.com
+For more information and detailed documentation about the API visit https://www.spiffystores.com.au/kb
 
 #### Ruby version
 
