@@ -13,11 +13,11 @@ The API is implemented as JSON over HTTP using all four verbs (GET/POST/PUT/DELE
 
 All API usage happens through SpiffyStores applications.
 
-For more information and detailed documentation about the API visit https://www.spiffystores.com.au/kb
+For more information and detailed documentation about the API visit https://www.spiffystores.com.au/kb/An_Introduction_to_the_Spiffy_Stores_API
 
 #### Ruby version
 
-This gem requires Ruby 2.3.1 as of version 4.3. If you need to use an older Ruby version then update your `Gemfile` to lock onto an older release than 4.3.
+This gem requires Ruby 2.4.3 as of version 4.11.0.
 
 ### Installation
 
@@ -138,17 +138,17 @@ SpiffyStoresAPI uses ActiveResource to communicate with the REST web service. Ac
    shop = SpiffyStoresAPI::Store.current
 
    # Get a specific product
-   product = SpiffyStoresAPI::Product.find(179761209)
+   product = SpiffyStoresAPI::Product.find(123123)
 
    # Create a new product
    new_product = SpiffyStoresAPI::Product.new
-   new_product.title = "Burton Custom Freestlye 151"
-   new_product.product_type = "Snowboard"
-   new_product.vendor = "Burton"
+   new_product.title = "Spiffy Stores T-Shirt"
+   new_product.product_type = "Shirt"
+   new_product.vendor = "Spiffy Stores"
    new_product.save
 
    # Update a product
-   product.handle = "burton-snowboard"
+   product.handle = "spiffy-stores-t-shirt"
    product.save
    ```
 
@@ -164,45 +164,6 @@ SpiffyStoresAPI uses ActiveResource to communicate with the REST web service. Ac
    SpiffyStoresAPI::Base.clear_session
    ```
 
-
-### Console
-
-This package also supports the ``spiffy_stores-cli`` executable to make it easy to open up an interactive console to use the API with a shop.
-
-1. Install the ``spiffy_stores_cli`` gem.
-
-```bash
-gem install spiffy_stores_cli
-```
-
-2. Obtain a private API key and password to use with your shop (step 2 in "Getting Started")
-
-3. Use the ``spiffy_stores-cli`` script to save the credentials for the shop to quickly log in.
-
-   ```bash
-   spiffy_stores-cli add yourshopname
-   ```
-
-   Follow the prompts for the shop domain, API key and password.
-
-4. Start the console for the connection.
-
-   ```bash
-   spiffy_stores-cli console
-   ```
-
-5. To see the full list of commands, type:
-
-   ```bash
-   spiffy_stores-cli help
-   ```
-
-## Threadsafety
-
-ActiveResource is threadsafe as of version 4.1 (which works with Rails 4.x and above).
-
-If you were previously using SpiffyStores's [activeresource fork](https://github.com/spiffy_stores/activeresource) then you should remove it and use ActiveResource 4.1.
-
 ## Using Development Version
 
 Download the source code and run:
@@ -213,10 +174,27 @@ rake install
 
 ## Additional Resources
 
-API Docs: http://docs.spiffy_stores.com/api
-
-Ask questions on the forums: http://ecommerce.spiffy_stores.com/c/spiffy_stores-apis-and-technology
+API Reference: https://www.spiffystores.com.au/kb/API_Reference
 
 ## Copyright
 
-Copyright (c) 2016 Spiffy Stores. See LICENSE for details.
+Copyright (c) 2018 Spiffy Stores
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
