@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
   s.homepage = %q{https://www.spiffystores.com.au}
 
   s.extra_rdoc_files = [
-    "LICENSE",
     "README.md"
   ]
   s.files         = `git ls-files`.split("\n")
